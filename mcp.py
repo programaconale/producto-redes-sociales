@@ -18,9 +18,18 @@ class MetricoolAPIClient:
         import streamlit as st
         
         self.base_url = "https://app.metricool.com/api"
-        self.user_id = user_id or st.secrets["api_keys"]["metricool_user_id"]
-        self.blog_id = blog_id or st.secrets["projects"]["default_blog_id"]
-        self.user_token = user_token or st.secrets["api_keys"]["metricool_user_token"]
+        
+        # Configuración con valores por defecto si no están en secrets
+        try:
+            self.user_id = user_id or st.secrets["api_keys"]["metricool_user_id"]
+            self.blog_id = blog_id or st.secrets["projects"]["default_blog_id"]
+            self.user_token = user_token or st.secrets["api_keys"]["metricool_user_token"]
+        except KeyError:
+            # Valores por defecto si no están configurados en secrets
+            self.user_id = user_id or 3752757
+            self.blog_id = blog_id or 4827857
+            self.user_token = user_token or "AFILXUDKQGBHUMVPOXHFWVJEXWLVPSTTXSSVSJLPKIUZHXSHCBCRHFGLMQUYDFIA"
+        
         self.session = requests.Session()
         self.auth_configured = True
         

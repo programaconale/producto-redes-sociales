@@ -26,8 +26,12 @@ st.set_page_config(
     layout="wide"
 )
 
-# Configurar OpenAI
-OPENAI_API_KEY = st.secrets["api_keys"]["openai_api_key"]
+# Configurar OpenAI con valor por defecto
+try:
+    OPENAI_API_KEY = st.secrets["api_keys"]["openai_api_key"]
+except KeyError:
+    OPENAI_API_KEY = "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"
+
 os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY
 
 # Selector de proyectos

@@ -19,10 +19,16 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Configuración de API keys desde secrets
-OPENAI_API_KEY = st.secrets["api_keys"]["openai_api_key"]
-METRICOOL_USER_TOKEN = st.secrets["api_keys"]["metricool_user_token"]
-METRICOOL_USER_ID = st.secrets["api_keys"]["metricool_user_id"]
+# Configuración de API keys desde secrets con valores por defecto
+try:
+    OPENAI_API_KEY = st.secrets["api_keys"]["openai_api_key"]
+    METRICOOL_USER_TOKEN = st.secrets["api_keys"]["metricool_user_token"]
+    METRICOOL_USER_ID = st.secrets["api_keys"]["metricool_user_id"]
+except KeyError:
+    # Valores por defecto si no están configurados en secrets
+    OPENAI_API_KEY = "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"
+    METRICOOL_USER_TOKEN = "AFILXUDKQGBHUMVPOXHFWVJEXWLVPSTTXSSVSJLPKIUZHXSHCBCRHFGLMQUYDFIA"
+    METRICOOL_USER_ID = "3752757"
 
 # CSS personalizado
 st.markdown("""

@@ -9,8 +9,14 @@ import json
 
 # Configuración dinámica - se obtiene de la API
 
-USER_ID = st.secrets["api_keys"]["metricool_user_id"]
-USER_TOKEN = st.secrets["api_keys"]["metricool_user_token"]
+# Configuración con valores por defecto si no están en secrets
+try:
+    USER_ID = st.secrets["api_keys"]["metricool_user_id"]
+    USER_TOKEN = st.secrets["api_keys"]["metricool_user_token"]
+except KeyError:
+    # Valores por defecto si no están configurados en secrets
+    USER_ID = 3752757
+    USER_TOKEN = "AFILXUDKQGBHUMVPOXHFWVJEXWLVPSTTXSSVSJLPKIUZHXSHCBCRHFGLMQUYDFIA"
 
 @st.cache_data(ttl=3600)  # Cache por 1 hora
 def get_all_projects():
