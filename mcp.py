@@ -6,21 +6,23 @@ from urllib.parse import urlencode, quote
 class MetricoolAPIClient:
     """Cliente optimizado para interactuar con la API de Metricool con autenticación"""
     
-    def __init__(self, user_id: int = 4031061, blog_id: int = 4827857, user_token: str = None):
+    def __init__(self, user_id: int = None, blog_id: int = None, user_token: str = None):
         """
-        Inicializa el cliente con los IDs por defecto
+        Inicializa el cliente con los IDs desde secrets o por defecto
         
         Args:
             user_id: ID del usuario de Metricool
             blog_id: ID del blog/marca en Metricool
             user_token: Token de usuario para autenticación
         """
+        import streamlit as st
+        
         self.base_url = "https://app.metricool.com/api"
-        self.user_id = user_id
-        self.blog_id = blog_id
-        self.user_token = user_token
+        self.user_id = user_id or st.secrets["api_keys"]["metricool_user_id"]
+        self.blog_id = blog_id or st.secrets["projects"]["default_blog_id"]
+        self.user_token = user_token or st.secrets["api_keys"]["metricool_user_token"]
         self.session = requests.Session()
-        self.auth_configured = False if not user_token else True
+        self.auth_configured = True
         
     def set_user_token(self, user_token: str):
         """

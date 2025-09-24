@@ -13,11 +13,16 @@ from project_manager import create_project_selector, show_project_info_header
 
 # Configuración de la página principal
 st.set_page_config(
-    page_title="Analytics Dashboard - Widu Legal",
+    page_title="Analytics Dashboard - Jungle Creative Agency",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Configuración de API keys desde secrets
+OPENAI_API_KEY = st.secrets["api_keys"]["openai_api_key"]
+METRICOOL_USER_TOKEN = st.secrets["api_keys"]["metricool_user_token"]
+METRICOOL_USER_ID = st.secrets["api_keys"]["metricool_user_id"]
 
 # CSS personalizado
 st.markdown("""
